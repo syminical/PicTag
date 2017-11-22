@@ -12,10 +12,11 @@ public class PicTag extends JFrame {
 
 	private DragListener drag = new DragListener();
 	private JPanel atlas = new JPanel();
+	private PicList Pictures;
 
 	public PicTag() {
 
-		super("PicTag");
+		super( "PicTag" );
 
 		prepareComponents();
 		burden();
@@ -36,26 +37,26 @@ public class PicTag extends JFrame {
 	//makes atlas carry everything
 	private void burden() {
 
-		atlas.setPreferredSize(new Dimension(600, 390));
-		atlas.setLayout(new BoxLayout(atlas, BoxLayout.Y_AXIS));
-		atlas.setBackground(new Color(0, 0, 0, 240));
+		atlas.setPreferredSize( new Dimension( 600, 390 ) );
+		atlas.setLayout( new BoxLayout( atlas, BoxLayout.Y_AXIS ) );
+		atlas.setBackground( new Color( 0, 0, 0, 240 ) );
 
 	}
 
 	//JFrame setup
 	private void buildAbox() {
 
-		this.addMouseListener(drag);
-		this.addMouseMotionListener(drag);
+		this.addMouseListener( drag );
+		this.addMouseMotionListener( drag );
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.setUndecorated(true);
-		this.setBackground(new Color(0, 0, 0, 0));
-		this.add(new AlphaContainer(atlas));
+		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		this.setResizable( false );
+		this.setUndecorated( true );
+		this.setBackground( new Color( 0, 0, 0, 0 ) );
+		this.add( new AlphaContainer( atlas ));
 		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
+		this.setLocationRelativeTo( null );
+		this.setVisible( true );
 
 	}
 
@@ -66,25 +67,25 @@ public class PicTag extends JFrame {
 		int c = 0, max = 20;
 		boolean inc = true, bgw = false;
 
-		while (true) {
+		while ( true ) {
 
 			//background breath, cooler window
-			if (System.currentTimeMillis() - bg >= 66) {
+			if ( System.currentTimeMillis() - bg >= 66 ) {
 
 				if (bgw) {
 
-					if (c > 0) c--;
+					if ( c > 0 ) c--;
 					else { bgw = false; c = 0; inc = true; }
 
 				} else {
 
-					if (c < max && inc) c++; //:)
+					if ( c < max && inc ) c++; // :D
 					else c--;
 
-					atlas.setBackground(new Color(c, c, c, 240));
+					atlas.setBackground( new Color( c, c, c, 240 ) );
 
-					if (c == max) inc = false;
-					else if (c == 0) { bgw = true; c = (2 * max); }
+					if ( c == max ) inc = false;
+					else if ( c == 0 ) { bgw = true; c = ( 2 * max ); }
 
 				}
 
@@ -93,7 +94,7 @@ public class PicTag extends JFrame {
 			}
 
 			//cpu saver
-			try { Thread.sleep(10); } catch(Exception e) { System.out.println("*");}
+			try { Thread.sleep(10); } catch( Exception e ) { System.out.println( "*" );}
 
 		}
 
@@ -101,7 +102,9 @@ public class PicTag extends JFrame {
 
 	public PicTag box() { return this; }
 
-	public static void main(String[] Container) {
+	public PicList Pictures() { return Pictures; }
+
+	public static void main( String[] Container ) {
 
 		new PicTag();
 
