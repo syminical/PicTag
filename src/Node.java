@@ -6,7 +6,7 @@ public class Node<T> {
 	private T Data;
 	private Node<T> Next, Last;
 
-	public Node(T Container, Node<T> Container2, Node<T> Container3) {
+	public Node( T Container, Node<T> Container2, Node<T> Container3 ) {
 
 		Data = Container;
 		Next = Container2;
@@ -14,9 +14,9 @@ public class Node<T> {
 
 	}
 
-	public Next(Node<T> Container) { Next = Container; }
+	public void Next( Node<T> Container ) { Next = Container; }
 
-	public Last(Node<T> Container) { Last = Container; }
+	public void Last( Node<T> Container ) { Last = Container; }
 
 	public T Data() { return Data; }
 

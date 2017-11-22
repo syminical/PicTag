@@ -2,8 +2,11 @@
 //theworldisquiethere
 
 import javax.swing.TransferHandler;
+import java.awt.datatransfer.*;
+import java.io.*;
+import java.util.List;
 
-public class DropHolder extends TransferHandler {
+public class DropHandler extends TransferHandler {
 
 	@Override
 	public boolean canImport(TransferHandler.TransferSupport support) {
@@ -13,6 +16,8 @@ public class DropHolder extends TransferHandler {
 			if (flavor.equals(DataFlavor.imageFlavor))
 
 				return true;
+
+		return false;
 
 	}
 
@@ -25,11 +30,13 @@ public class DropHolder extends TransferHandler {
 
 		try {
 
-			files = (List<File>) support.getTransferable().getTranferData(DataFlavor.imageFlavor);
+			Files = (List<File>) support.getTransferable().getTransferData(DataFlavor.imageFlavor);
 
 		} catch (UnsupportedFlavorException | IOException ex) { return false; }
 
 		for (File file : Files) { }
+
+		return true;
 
 	}
 

@@ -1,15 +1,17 @@
 
 //theworldisquiethere
 
-public class PicList<Pic> extends CircularDoubleLinkedList {
+public class PicList extends CircularDoubleLinkedList<Pic> {
 
 	Node<Pic> Current;
 
+	public PicList() { super(); }
+
 	public Pic start() {
 
-		if (size == 0) return null;
+		if (size() == 0) return null;
 
-		Current = Head;
+		Current = Head();
 
 		return Current.Data();
 
@@ -17,31 +19,31 @@ public class PicList<Pic> extends CircularDoubleLinkedList {
 
 	public Pic end() {
 
-		if (size == 0) return null;
+		if (size() == 0) return null;
 
-		Current = Head.last;
+		Current = Head().Last();
 
-		return Current.Data;
+		return Current.Data();
 
 	}
 
 	public Pic next() {
 
-		if (size == 0) return null;
+		if (size() == 0) return null;
 
-		Current = Current.next;
+		Current = Current.Next();
 
-		return Current.Data;
+		return Current.Data();
 
 	}
 
 	public Pic last() {
 
-		if (size == 0) return null;
+		if (size() == 0) return null;
 
-		Current = Current.last;
+		Current = Current.Last();
 
-		return Current.Data;
+		return Current.Data();
 
 	}
 
