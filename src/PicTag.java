@@ -25,6 +25,8 @@ public class PicTag extends JFrame {
 
 	}
 
+	private void loadAssests() { }
+
 	//puts components together, sets their properties
 	private void prepareComponents() {
 
