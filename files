@@ -1,4 +1,5 @@
 src/AlphaContainer.java
+src/BackgroundPanel.java
 src/CircularDoubleLinkedList.java
 src/DragListener.java
 src/DropHandler.java

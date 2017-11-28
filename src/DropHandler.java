@@ -42,20 +42,15 @@ public class DropHandler extends TransferHandler {
 
 		} catch ( UnsupportedFlavorException | IOException ex ) { return false; }
 
-		BufferedImage Temp = new BufferedImage(0, 0, 0);
 		Pic Temp2 = new Pic();
 
 		for ( File TempFile : Files ) {
 
 			try {
 
-				Temp = ImageIO.read( TempFile );
+				Temp2 = new Pic( ImageIO.read( TempFile ), TempFile );
 
 			} catch ( IOException e ) { }
-
-			Temp2 = (Pic)Temp;
-
-			Temp2.File( TempFile );
 
 			Pictures.add( Temp2 );
 

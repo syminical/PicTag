@@ -7,12 +7,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.border.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
 
 public class PicTag extends JFrame {
 
 	private DragListener drag = new DragListener();
 	private JPanel atlas = new JPanel();
 	private PicList Pictures;
+	private final Dimension plusLength = new Dimension( 100, 100 );
 
 	public PicTag() {
 
@@ -30,6 +34,22 @@ public class PicTag extends JFrame {
 	//puts components together, sets their properties
 	private void prepareComponents() {
 
+		
+		Pic plus = new Pic();
+		BackgroundPanel pictureFrame;
+
+		try {
+
+			plus = new Pic( ImageIO.read( new File( "plus.png" ) ) ); 
+
+		} catch (Exception e) { System.out.println("picture error lol"); e.printStackTrace(); }
+
+		pictureFrame = new BackgroundPanel(plus.Picture(), 0);
+
+		pictureFrame.setBackground( new Color( 0, 0, 0, 100 ) );
+
+		atlas.add( new AlphaContainer( pictureFrame ) );
+
 		componentListeners();
 
 	}
@@ -39,9 +59,9 @@ public class PicTag extends JFrame {
 	//makes atlas carry everything
 	private void burden() {
 
-		atlas.setPreferredSize( new Dimension( 600, 390 ) );
+		atlas.setPreferredSize( new Dimension( plusLength ) );
 		atlas.setLayout( new BoxLayout( atlas, BoxLayout.Y_AXIS ) );
-		atlas.setBackground( new Color( 0, 0, 0, 240 ) );
+		atlas.setBackground( new Color( 0, 0, 0, 0 ) );
 
 	}
 
