@@ -32,13 +32,13 @@ public class DragListener extends MouseInputAdapter
 
 	public void mouseEntered( MouseEvent e ) {
 
-		if ( INSTANCE != null ) INSTANCE.changeColor( new Color( 0, 255, 0, 255 ) );
+		if ( INSTANCE != null ) INSTANCE.toggleExtras();
 		
 	}
 
 	public void mouseExited( MouseEvent e ) {
 
-		if ( INSTANCE != null ) INSTANCE.changeColor( new Color( 255, 0, 0, 150 ) );
+		if ( INSTANCE != null ) INSTANCE.toggleExtras();
 
 	}
 

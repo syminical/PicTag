@@ -19,6 +19,8 @@ public class PicTag extends JFrame {
 	private PicList Pictures;
 	private final Dimension plusLength = new Dimension( 100, 100 );
 	private Pic Plus;
+	private BackgroundPanel AddFrame;
+	private BackgroundPanel ExtrasFrame;
 	private BackgroundPanel PictureFrame;
 	private Color UserColor = new Color( 0, 0, 255, 255 );
 
@@ -35,22 +37,19 @@ public class PicTag extends JFrame {
 
 	}
 
-	private void loadAssets() {
-
-		Plus = new Pic();
-
-		try { Plus = new Pic( ImageIO.read( new File( "plus2.png" ) ) ); } catch (Exception e) { System.out.println("picture error lol"); e.printStackTrace(); }
-
-	}
-
 	//puts components together, sets their properties
 	private void prepareComponents() {
 
-		loadAssets();
+		try {
 
-		PictureFrame = new BackgroundPanel(Plus.Picture(), 0);
-		PictureFrame.setBackground( UserColor );
+			AddFrame = new BackgroundPanel( ImageIO.read( new File( "plus2.png" ) ) );
+			ExtrasFrame = new BackgroundPanel( ImageIO.read( new File( "plus.png" ) ) );
 
+		} catch (Exception e) { System.out.println( "asset error" ); }
+
+		AddFrame.setBackground( UserColor );
+		AddFrame.add( new AlphaContainer( ExtrasFrame ) );
+			ExtrasFrame.setBackground( new Color( 0, 0, 0, 0 ) );
 		componentListeners();
 
 	}
@@ -64,7 +63,7 @@ public class PicTag extends JFrame {
 		atlas.setLayout( new BoxLayout( atlas, BoxLayout.Y_AXIS ) );
 		atlas.setBackground( new Color( 0, 0, 0, 0 ) );
 
-		atlas.add( new AlphaContainer( PictureFrame ) );
+		atlas.add( new AlphaContainer( AddFrame ) );
 	}
 
 	//JFrame setup
@@ -84,7 +83,9 @@ public class PicTag extends JFrame {
 
 	}
 
-	public void changeColor( Color Container ) { PictureFrame.setBackground( Container ); } //USERCOLOR
+	public void toggleExtras() { ExtrasFrame.setVisible( !ExtrasFrame.isVisible() ); }
+
+	public void changeColor( Color Container ) { AddFrame.setBackground( Container ); } //USERCOLOR
 
 	public static PicTag INSTANCE() { return INSTANCE; }
 
