@@ -11,6 +11,9 @@ public class DragListener extends MouseInputAdapter
     Point location;
     MouseEvent pressed;
     Component component;
+	PicTag INSTANCE;
+
+	public void updateINSTANCE( PicTag Container ) { INSTANCE = Container; }
 
     public void mousePressed(MouseEvent me)
     {
@@ -25,4 +28,18 @@ public class DragListener extends MouseInputAdapter
         int y = location.y - pressed.getY() + me.getY();
         component.setLocation(x, y);
      }
+
+
+	public void mouseEntered( MouseEvent e ) {
+
+		if ( INSTANCE != null ) INSTANCE.changeColor( new Color( 0, 255, 0, 255 ) );
+		
+	}
+
+	public void mouseExited( MouseEvent e ) {
+
+		if ( INSTANCE != null ) INSTANCE.changeColor( new Color( 255, 0, 0, 150 ) );
+
+	}
+
 }

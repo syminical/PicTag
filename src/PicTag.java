@@ -13,42 +13,43 @@ import javax.imageio.*;
 
 public class PicTag extends JFrame {
 
+	private static PicTag INSTANCE;
 	private DragListener drag = new DragListener();
 	private JPanel atlas = new JPanel();
 	private PicList Pictures;
 	private final Dimension plusLength = new Dimension( 100, 100 );
+	private Pic Plus;
+	private BackgroundPanel PictureFrame;
+	private Color UserColor = new Color( 0, 0, 255, 255 );
 
 	public PicTag() {
 
 		super( "PicTag" );
 
+		INSTANCE = this;
+		drag.updateINSTANCE( INSTANCE );
+
 		prepareComponents();
-		burden();
+		burdenAtlas();
 		buildAbox();
-		animate();
 
 	}
 
-	private void loadAssests() { }
+	private void loadAssets() {
+
+		Plus = new Pic();
+
+		try { Plus = new Pic( ImageIO.read( new File( "plus2.png" ) ) ); } catch (Exception e) { System.out.println("picture error lol"); e.printStackTrace(); }
+
+	}
 
 	//puts components together, sets their properties
 	private void prepareComponents() {
 
-		
-		Pic plus = new Pic();
-		BackgroundPanel pictureFrame;
+		loadAssets();
 
-		try {
-
-			plus = new Pic( ImageIO.read( new File( "plus.png" ) ) ); 
-
-		} catch (Exception e) { System.out.println("picture error lol"); e.printStackTrace(); }
-
-		pictureFrame = new BackgroundPanel(plus.Picture(), 0);
-
-		pictureFrame.setBackground( new Color( 0, 0, 0, 100 ) );
-
-		atlas.add( new AlphaContainer( pictureFrame ) );
+		PictureFrame = new BackgroundPanel(Plus.Picture(), 0);
+		PictureFrame.setBackground( UserColor );
 
 		componentListeners();
 
@@ -57,12 +58,13 @@ public class PicTag extends JFrame {
 	private void componentListeners() { }
 
 	//makes atlas carry everything
-	private void burden() {
+	private void burdenAtlas() {
 
 		atlas.setPreferredSize( new Dimension( plusLength ) );
 		atlas.setLayout( new BoxLayout( atlas, BoxLayout.Y_AXIS ) );
 		atlas.setBackground( new Color( 0, 0, 0, 0 ) );
 
+		atlas.add( new AlphaContainer( PictureFrame ) );
 	}
 
 	//JFrame setup
@@ -82,54 +84,13 @@ public class PicTag extends JFrame {
 
 	}
 
-	//main loop after setup, handles all animation
-	private void animate() {
+	public void changeColor( Color Container ) { PictureFrame.setBackground( Container ); } //USERCOLOR
 
-		double bg = 0;
-		int c = 0, max = 20;
-		boolean inc = true, bgw = false;
-
-		while ( true ) {
-
-			//background breath, cooler window
-			if ( System.currentTimeMillis() - bg >= 66 ) {
-
-				if (bgw) {
-
-					if ( c > 0 ) c--;
-					else { bgw = false; c = 0; inc = true; }
-
-				} else {
-
-					if ( c < max && inc ) c++; // :D
-					else c--;
-
-					atlas.setBackground( new Color( c, c, c, 240 ) );
-
-					if ( c == max ) inc = false;
-					else if ( c == 0 ) { bgw = true; c = ( 2 * max ); }
-
-				}
-
-				bg = System.currentTimeMillis();
-
-			}
-
-			//cpu saver
-			try { Thread.sleep(10); } catch( Exception e ) { System.out.println( "*" );}
-
-		}
-
-	}
-
-	public PicTag box() { return this; }
+	public static PicTag INSTANCE() { return INSTANCE; }
 
 	public PicList Pictures() { return Pictures; }
 
-	public static void main( String[] Container ) {
-
-		new PicTag();
-
-	}
+	public static void main( String[] Container ) { new PicTag(); }
 
 }
+
