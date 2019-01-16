@@ -11,9 +11,14 @@ public class DragListener extends MouseInputAdapter
     Point location;
     MouseEvent pressed;
     Component component;
+
 	PicTag INSTANCE;
 
 	public void updateINSTANCE( PicTag Container ) { INSTANCE = Container; }
+
+    public void mouseClicked(MouseEvent me) {
+	INSTANCE.clicked();
+    }
 
     public void mousePressed(MouseEvent me)
     {
@@ -32,13 +37,13 @@ public class DragListener extends MouseInputAdapter
 
 	public void mouseEntered( MouseEvent e ) {
 
-		if ( INSTANCE != null ) INSTANCE.toggleExtras();
+		if ( INSTANCE != null ) INSTANCE.changeBackground(2);
 		
 	}
 
 	public void mouseExited( MouseEvent e ) {
 
-		if ( INSTANCE != null ) INSTANCE.toggleExtras();
+		if ( INSTANCE != null ) INSTANCE.changeBackground(1);
 
 	}
 
