@@ -11,26 +11,27 @@ import javax.swing.border.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
+import java.awt.geom.Ellipse2D;
 
 public class PicTag extends JFrame {
 
 	private static PicTag INSTANCE;
-	private DragListener drag = new DragListener();
+	private DragListener Drag;
 	private JPanel Atlas = new JPanel();
 	private PicList Pictures;
-	private final Dimension plusLength = new Dimension( 300, 300 );
+	private final Dimension PLUSLENGTH = new Dimension( 300, 300 );
 	private Pic Plus;
 	private BackgroundPanel MainPanel, PicturePanel;
-	private JFileChooser chooser;
+	private JFileChooser Chooser;
 	private Image BG1, BG2, BG3, BG4;
 	private int lastImg;
+    private ArrayList<Zone> Zones;
 
 	public PicTag() {
 
 		super( "PicTag" );
 
 		INSTANCE = this;
-		drag.updateINSTANCE( INSTANCE );
 
 		prepareComponents();
 		burdenAtlas();
@@ -40,28 +41,40 @@ public class PicTag extends JFrame {
 
 	//puts components together, sets their properties
 	private void prepareComponents() {
+        
+        Drag = new DragListener();
+        Zones = new ArrayList<Zone>();
+        
+        Zones.add(new Zone(new Ellipse2D.Double(135, 190, 21, 19)) {
+            @Override
+            public void trigger() { PicTag.INSTANCE().changeBackground(4); }
+        });
+        Zones.add(new Zone(new Rectangle(113, 104, 68, 87)) {
+            @Override
+            public void trigger() { PicTag.INSTANCE().changeBackground(3); }
+        });
 
 		try {
 
-			BG1 = ImageIO.read( new File( "img/test.png" ) );
-			BG2 = ImageIO.read( new File( "img/test2.png" ) );
-			BG3 = ImageIO.read( new File( "img/test3.png" ) );
-			BG4 = ImageIO.read( new File( "img/test4.png" ) );
+			BG1 = ImageIO.read( new File( "img/bg1.png" ) );
+			BG2 = ImageIO.read( new File( "img/bg2.png" ) );
+			BG3 = ImageIO.read( new File( "img/bg3.png" ) );
+			BG4 = ImageIO.read( new File( "img/bg4.png" ) );
 
 			MainPanel = new BackgroundPanel( BG1 );
 				MainPanel.setBackground( new Color( 0, 0, 0, 0 ) );
 				MainPanel.setVisible(true);
 		} catch (Exception e) { System.out.println( "asset error" ); }
 
-		chooser = new JFileChooser();
-			chooser.setFileFilter(new FileNameExtensionFilter("jpg, jpeg, gif, png", "jpg", "jpeg", "gif", "png"));
+		Chooser = new JFileChooser();
+			Chooser.setFileFilter(new FileNameExtensionFilter("jpg, jpeg, gif, png", "jpg", "jpeg", "gif", "png"));
 
 	}
 
 	//makes Atlas carry everything
 	private void burdenAtlas() {
 
-		Atlas.setPreferredSize( new Dimension( plusLength ) );
+		Atlas.setPreferredSize( new Dimension( PLUSLENGTH ) );
 		Atlas.setLayout( new BoxLayout( Atlas, BoxLayout.Y_AXIS ) );
 		Atlas.setBackground( new Color( 0, 0, 0, 0 ) );
 
@@ -71,8 +84,8 @@ public class PicTag extends JFrame {
 	//JFrame setup
 	private void buildAbox() {
 
-		this.addMouseListener( drag );
-		this.addMouseMotionListener( drag );
+		this.addMouseListener( Drag );
+		this.addMouseMotionListener( Drag );
 
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setResizable( false );
@@ -87,9 +100,20 @@ public class PicTag extends JFrame {
 
 	public void clicked() {
 
-		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) MainPanel.setBackground( new Color( 0, 255, 0 ) );
+		if (Chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) MainPanel.setBackground( new Color( 0, 255, 0 ) );
 
 	}
+    
+    public void checkZones(MouseEvent me) {
+           
+        for (Zone temp : Zones)
+            
+            if (temp.Shape().contains(me.getPoint())) {
+                temp.trigger();
+                return;
+            }
+        changeBackground(2);
+    }
 
 	public void changeBackground(int container) {
 

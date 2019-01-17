@@ -1,8 +1,11 @@
 
 //I did not create this, but I did edit it a little.
+//My changes let it handle all mouse events for the program.
 //I got this code from https://tips4java.wordpress.com/2009/06/14/moving-windows/
 
 import javax.swing.event.*;
+import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
@@ -11,13 +14,10 @@ public class DragListener extends MouseInputAdapter
     Point location;
     MouseEvent pressed;
     Component component;
-
-	PicTag INSTANCE;
-
-	public void updateINSTANCE( PicTag Container ) { INSTANCE = Container; }
-
+    
     public void mouseClicked(MouseEvent me) {
-	INSTANCE.clicked();
+	//PicTag.INSTANCE().clicked();
+    //JOptionPane.showMessageDialog(new JFrame(), "" + me.getPoint());
     }
 
     public void mousePressed(MouseEvent me)
@@ -37,14 +37,18 @@ public class DragListener extends MouseInputAdapter
 
 	public void mouseEntered( MouseEvent e ) {
 
-		if ( INSTANCE != null ) INSTANCE.changeBackground(2);
+		if ( PicTag.INSTANCE() != null ) PicTag.INSTANCE().changeBackground(2);
 		
 	}
 
 	public void mouseExited( MouseEvent e ) {
 
-		if ( INSTANCE != null ) INSTANCE.changeBackground(1);
+		if ( PicTag.INSTANCE() != null ) PicTag.INSTANCE().changeBackground(1);
 
 	}
+    
+    public void mouseMoved( MouseEvent me ) {
+        PicTag.INSTANCE().checkZones(me);
+    }
 
 }

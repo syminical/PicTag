@@ -8,3 +8,4 @@ src/Pic.java
 src/PicList.java
 src/PicTag.java
 src/Tag.java
+src/Zone.java
