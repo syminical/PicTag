@@ -3,6 +3,7 @@ src/BackgroundPanel.java
 src/CircularDoubleLinkedList.java
 src/DragListener.java
 src/DropHandler.java
+src/KeyAction.java
 src/Node.java
 src/Pic.java
 src/PicList.java

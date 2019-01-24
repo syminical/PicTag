@@ -26,6 +26,7 @@ public class PicTag extends JFrame {
 	private Image BG1, BG2, BG3, BG4;
 	private int lastImg;
     private ArrayList<Zone> Zones;
+    private KeyAction KA1, KA2, KA3;
 
 	public PicTag() {
 
@@ -53,6 +54,12 @@ public class PicTag extends JFrame {
             @Override
             public void trigger() { PicTag.INSTANCE().changeBackground(3); }
         });
+        
+        KA1 = new KeyAction() {
+            public void trigger() {
+                //PicTag.INSTANCE().PicMan().addTag("[1]");   
+            }
+        };
 
 		try {
 
@@ -97,10 +104,21 @@ public class PicTag extends JFrame {
 		this.setVisible( true );
 
 	}
+    
+    private void fileChosen() {
+        File Ftemp = Chooser.getSelectedFile();
+        File Ftemp2 = new File("" + Ftemp.getParent() + Ftemp.separator + "testName.png");
 
+        if (!Ftemp2.exists())
+            Ftemp.renameTo(Ftemp2);
+        else
+            JOptionPane.showMessageDialog(new JFrame(), "That file already exists!");
+    }
+    
 	public void clicked() {
 
-		if (Chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) MainPanel.setBackground( new Color( 0, 255, 0 ) );
+		if (Chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) 
+                fileChosen(); 
 
 	}
     

@@ -16,7 +16,7 @@ public class DragListener extends MouseInputAdapter
     Component component;
     
     public void mouseClicked(MouseEvent me) {
-	//PicTag.INSTANCE().clicked();
+        PicTag.INSTANCE().clicked();
     //JOptionPane.showMessageDialog(new JFrame(), "" + me.getPoint());
     }
 
