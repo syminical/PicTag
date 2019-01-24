@@ -1,0 +1,4 @@
+Make a PicManager.java
+    iterates over PicList, lives in PicViewer box, handles keybind input.
+
+Change main frame background on window focus loss
