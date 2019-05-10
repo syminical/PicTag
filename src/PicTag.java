@@ -23,10 +23,10 @@ public class PicTag extends JFrame {
 	private Pic Plus;
 	private BackgroundPanel MainPanel, PicturePanel;
 	private JFileChooser Chooser;
-	private Image BG1, BG2, BG3, BG4;
+	private Image BG1, BG2, BG3, BG4, BG5;
 	private int lastImg;
-    private ArrayList<Zone> Zones;
-    private KeyAction KA1, KA2, KA3;
+   	private ArrayList<Zone> Zones;
+    	private KeyAction KA1, KA2, KA3;
 
 	public PicTag() {
 
@@ -54,6 +54,10 @@ public class PicTag extends JFrame {
             @Override
             public void trigger() { PicTag.INSTANCE().changeBackground(3); }
         });
+	Zones.add(new Zone(new Ellipse2D.Double(182, 46, 45, 45)) {
+	    @Override
+	    public void trigger() { PicTag.INSTANCE().changeBackground(5); }
+	});
         
         KA1 = new KeyAction() {
             public void trigger() {
@@ -67,6 +71,7 @@ public class PicTag extends JFrame {
 			BG2 = ImageIO.read( new File( "img/bg2.png" ) );
 			BG3 = ImageIO.read( new File( "img/bg3.png" ) );
 			BG4 = ImageIO.read( new File( "img/bg4.png" ) );
+			BG5 = ImageIO.read( new File( "img/bg5.png" ) );
 
 			MainPanel = new BackgroundPanel( BG1 );
 				MainPanel.setBackground( new Color( 0, 0, 0, 0 ) );
@@ -105,33 +110,46 @@ public class PicTag extends JFrame {
 
 	}
     
-    private void fileChosen() {
-        File Ftemp = Chooser.getSelectedFile();
-        File Ftemp2 = new File("" + Ftemp.getParent() + Ftemp.separator + "testName.png");
+    	private void fileChosen() {
+        	File Ftemp = Chooser.getSelectedFile();
+       	 	File Ftemp2 = new File("" + Ftemp.getParent() + Ftemp.separator + "testName.png");
 
-        if (!Ftemp2.exists())
-            Ftemp.renameTo(Ftemp2);
-        else
-            JOptionPane.showMessageDialog(new JFrame(), "That file already exists!");
-    }
+      	 	if (!Ftemp2.exists())
+            		Ftemp.renameTo(Ftemp2);
+        	else
+           	 	JOptionPane.showMessageDialog(new JFrame(), "That file already exists!");
+    	}
     
 	public void clicked() {
+		switch (lastImg) {
+			case 3: 
+				if (Chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) 
+                			fileChosen(); 
+				break;
+			case 4:
+				//options
+				break;
+			case 5:
+				terminateProgram();
+			default:
+		}
+	}
 
-		if (Chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) 
-                fileChosen(); 
-
+	private void terminateProgram() {
+		//main frame
+		setVisible(false);
+		dispose();
 	}
     
-    public void checkZones(MouseEvent me) {
+    	public void checkZones(MouseEvent me) {
            
-        for (Zone temp : Zones)
-            
-            if (temp.Shape().contains(me.getPoint())) {
-                temp.trigger();
-                return;
-            }
-        changeBackground(2);
-    }
+        	for (Zone temp : Zones) 
+            		if (temp.Shape().contains(me.getPoint())) {
+                		temp.trigger();
+                		return;
+            		}
+        	changeBackground(2);
+    	}
 
 	public void changeBackground(int container) {
 
@@ -147,6 +165,9 @@ public class PicTag extends JFrame {
 				break;
 			case 4:
 				MainPanel.setImage(BG4);
+				break;
+			case 5:
+				MainPanel.setImage(BG5);
 				break;
 			default:
 				MainPanel.setImage(BG1);

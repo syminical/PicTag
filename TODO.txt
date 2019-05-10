@@ -2,3 +2,8 @@ Make a PicManager.java
     iterates over PicList, lives in PicViewer box, handles keybind input.
 
 Change main frame background on window focus loss
+
+	Add alpha'd darker background smoke to contrast white backgrounds.
+
+make sure terminateProgram() works correctly
+	it currently is not always reliable :(
