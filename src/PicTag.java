@@ -19,11 +19,12 @@ public class PicTag extends JFrame {
 	private DragListener Drag;
 	private JPanel Atlas = new JPanel();
 	private PicList Pictures;
-	private final Dimension PLUSLENGTH = new Dimension( 300, 300 );
+	private final Dimension MAIN_SIZE = new Dimension( 300, 300 );
+	private final Dimension SETTINGS_SIZE = new Dimension( 600, 600 );
 	private Pic Plus;
 	private BackgroundPanel MainPanel, PicturePanel;
 	private JFileChooser Chooser;
-	private Image BG1, BG2, BG3, BG4, BG5;
+	private Image MBG1, MBG2, MBG3, MBG4, MBG5, SBG1;
 	private int lastImg;
    	private ArrayList<Zone> Zones;
     	private KeyAction KA1, KA2, KA3;
@@ -67,13 +68,14 @@ public class PicTag extends JFrame {
 
 		try {
 
-			BG1 = ImageIO.read( new File( "img/bg1.png" ) );
-			BG2 = ImageIO.read( new File( "img/bg2.png" ) );
-			BG3 = ImageIO.read( new File( "img/bg3.png" ) );
-			BG4 = ImageIO.read( new File( "img/bg4.png" ) );
-			BG5 = ImageIO.read( new File( "img/bg5.png" ) );
+			MBG1 = ImageIO.read( new File( "img/mbg1.png" ) );
+			MBG2 = ImageIO.read( new File( "img/mbg2.png" ) );
+			MBG3 = ImageIO.read( new File( "img/mbg3.png" ) );
+			MBG4 = ImageIO.read( new File( "img/mbg4.png" ) );
+			MBG5 = ImageIO.read( new File( "img/mbg5.png" ) );
+			SBG1 = ImageIO.read( new File( "img/sbg1.png" ) );
 
-			MainPanel = new BackgroundPanel( BG1 );
+			MainPanel = new BackgroundPanel( MBG1 );
 				MainPanel.setBackground( new Color( 0, 0, 0, 0 ) );
 				MainPanel.setVisible(true);
 		} catch (Exception e) { System.out.println( "asset error" ); }
@@ -86,7 +88,7 @@ public class PicTag extends JFrame {
 	//makes Atlas carry everything
 	private void burdenAtlas() {
 
-		Atlas.setPreferredSize( new Dimension( PLUSLENGTH ) );
+		Atlas.setPreferredSize( new Dimension( MAIN_SIZE ) );
 		Atlas.setLayout( new BoxLayout( Atlas, BoxLayout.Y_AXIS ) );
 		Atlas.setBackground( new Color( 0, 0, 0, 0 ) );
 
@@ -128,6 +130,7 @@ public class PicTag extends JFrame {
 				break;
 			case 4:
 				//options
+				changeBackground(6);
 				break;
 			case 5:
 				terminateProgram();
@@ -158,19 +161,24 @@ public class PicTag extends JFrame {
 
 		switch (container) {
 			case 2:
-				MainPanel.setImage(BG2);
+				MainPanel.setImage(MBG2);
 				break;
 			case 3:
-				MainPanel.setImage(BG3);
+				MainPanel.setImage(MBG3);
 				break;
 			case 4:
-				MainPanel.setImage(BG4);
+				MainPanel.setImage(MBG4);
 				break;
 			case 5:
-				MainPanel.setImage(BG5);
+				MainPanel.setImage(MBG5);
+				break;
+			case 6:
+				Atlas.setPreferredSize( new Dimension( MAIN_SIZE ) );
+				MainPanel.setImage(SBG1);
 				break;
 			default:
-				MainPanel.setImage(BG1);
+				Atlas.setPreferredSize( new Dimension( MAIN_SIZE ) );
+				MainPanel.setImage(MBG1);
 		}
 	}
 

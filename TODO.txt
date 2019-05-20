@@ -7,3 +7,56 @@ Change main frame background on window focus loss
 
 make sure terminateProgram() works correctly
 	it currently is not always reliable :(
+
+features:
+	filename variables
+	  %c counter
+	  %d date
+	  %o original name
+	job failed list
+	  files that could not be renamed
+	  ? retry option
+
+settings:
+    LIST 1
+	mode
+	  interactive mode
+       	    tags replace file name (with counter if needed)
+	      +pre or post append option
+	    add tag to file name
+	      +pre or post append option
+	      separator (one between name and tags)
+	        none, custom
+	  batch rename
+	    ! should support counter variable for input, e.g. [%d] becomes [0] for the first pic.
+	    auto order
+	      order by...
+            manual order
+	      thumbnail list
+	        leftClick to assign place in order
+	        rightClick to clear a pic's order assignment
+	        holdLeftClick to quick view full size image
+	        holdRightClick to clear all pic order assignments
+	          confirm box
+	destination folder
+	  change in place, or move to a new folder
+	disable feedback - (customizable) default action shows up for each enabled
+	  warnings
+	  confirmation prompts
+	  job failures
+	apply changes instantly, or confirm at the end
+	  depth of confirms
+	? dark mode
+	tag application order:
+	  order assigned
+	  alphabetical
+
+    LIST 2
+	tags/keybinds
+	  custom
+	    %d reg exp
+          default
+	    next pic
+	    prev pic
+            done
+	    restart
