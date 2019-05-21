@@ -15,17 +15,17 @@ import java.awt.geom.Ellipse2D;
 
 public class PicTag extends JFrame {
 
+private DragListener Drag;
+private PicList Pictures;
+private final Dimension MAIN_SIZE = new Dimension( 300, 300 );
+private final Dimension SETTINGS_SIZE = new Dimension( 600, 600 );
+private Pic Plus;
+private BackgroundPanel MainPanel, SettingsPanel, PicturePanel;
+private JFileChooser Chooser;
+private Image MBG1, MBG2, MBG3, MBG4, MBG5, SBG1;
+private int lastImg;
 	private static PicTag INSTANCE;
-	private DragListener Drag;
 	private JPanel Atlas = new JPanel();
-	private PicList Pictures;
-	private final Dimension MAIN_SIZE = new Dimension( 300, 300 );
-	private final Dimension SETTINGS_SIZE = new Dimension( 600, 600 );
-	private Pic Plus;
-	private BackgroundPanel MainPanel, PicturePanel;
-	private JFileChooser Chooser;
-	private Image MBG1, MBG2, MBG3, MBG4, MBG5, SBG1;
-	private int lastImg;
    	private ArrayList<Zone> Zones;
     	private KeyAction KA1, KA2, KA3;
 
@@ -190,3 +190,33 @@ public class PicTag extends JFrame {
 
 }
 
+public class PicTag {
+
+	private static PicTag INSTANCE;
+	private WindowBox MainBox, SettingsBox, InteractiveBox, DevBox;
+	private final Dimension MAIN_BOX_SIZE = new Dimension( 300, 300 ), SETTINGS_BOX_SIZE = new Dimension( 600, 600 ), INTERACTIVE_BOX_SIZE = new Dimension( 1000, 1000 );
+
+	public PicTag() {
+		if !loadAssets() JOptionPane.showMessageDialog(new JFrame(), "Failed to load Assets!");
+		createWindows();
+		addWindowListeners();
+	}
+
+	private boolean loadAssets() {
+
+	}
+
+	private void createWindows() {
+		MainBox = new WindowBox(INSTANCE, MAIN_WINDOW_SIZE);
+		SettingsBox = new WindowBox(INSTANCE, SETTINGS_BOX_SIZE);
+		InteractiveBox = new WindowBox(INSTANCE, INTERACTIVE_BOX_SIZE);
+		DevBox = new WindowBox(INSTANCE, SETTINGS_BOX_SIZE);
+	}
+
+	private void addWindowListeners() {
+
+	}
+	public static void main(String[] Args) {
+		INSTANCE = new PicTag();
+	}
+}
