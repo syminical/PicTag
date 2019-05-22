@@ -7,6 +7,7 @@ Change main frame background on window focus loss
 
 make sure terminateProgram() works correctly
 	it currently is not always reliable :(
+		system.exit(); ??? :thinking:
 
 features:
 	filename variables
