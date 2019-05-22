@@ -105,10 +105,10 @@ private int lastImg;
 		this.setResizable( false );
 		this.setUndecorated( true );
 		this.setBackground( new Color( 0, 0, 0, 0 ) );
-		this.add( new AlphaContainer( Atlas ));
-		this.pack();
-		this.setLocationRelativeTo( null );
-		this.setVisible( true );
+	this.add( new AlphaContainer( Atlas ));
+	this.pack();
+	this.setLocationRelativeTo( null );
+    this.setVisible( true );
 
 	}
     
@@ -142,6 +142,7 @@ private int lastImg;
 		//main frame
 		setVisible(false);
 		dispose();
+        system.exit();
 	}
     
     	public void checkZones(MouseEvent me) {
@@ -190,6 +191,8 @@ private int lastImg;
 
 }
 
+
+
 public class PicTag {
 
 	private static PicTag INSTANCE;
@@ -197,9 +200,12 @@ public class PicTag {
 	private final Dimension MAIN_BOX_SIZE = new Dimension( 300, 300 ), SETTINGS_BOX_SIZE = new Dimension( 600, 600 ), INTERACTIVE_BOX_SIZE = new Dimension( 1000, 1000 );
 
 	public PicTag() {
-		if !loadAssets() JOptionPane.showMessageDialog(new JFrame(), "Failed to load Assets!");
-		createWindows();
-		addWindowListeners();
+		if 
+            !loadAssets() JOptionPane.showMessageDialog(new JFrame(), "Failed to load Assets!");
+		else {
+            createWindows();
+            addWindowListeners();
+        }
 	}
 
 	private boolean loadAssets() {
