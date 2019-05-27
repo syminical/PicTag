@@ -17,6 +17,8 @@ make sure only one instance of program can be started at a time
 make window sizes relative, not pixel numbers
 	say NO to the crazy demands of resolution abuse >:c
 
+package correctly
+
 features:
 	filename variables
 	  %c counter
