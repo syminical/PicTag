@@ -11,13 +11,20 @@ import java.awt.*;
 
 public class DragListener extends MouseInputAdapter
 {
-    Point location;
-    MouseEvent pressed;
-    Component component;
-    
-    public void mouseClicked(MouseEvent me) {
-        PicTag.INSTANCE().clicked();
-    //JOptionPane.showMessageDialog(new JFrame(), "" + me.getPoint());
+    private WindowBox Parent;
+    private Point location;
+    private MouseEvent pressed;
+    private Component component;
+
+    public DragListener(WindowBox P) {
+        super();
+        
+        Parent = P;
+    }
+
+    public void mouseClicked(MouseEvent E) {
+        if ( Parent != null ) Parent.mouseClicked(E);
+        //JOptionPane.showMessageDialog(new JFrame(), "" + E.getPoint());
     }
 
     public void mousePressed(MouseEvent me)
@@ -35,20 +42,16 @@ public class DragListener extends MouseInputAdapter
      }
 
 
-	public void mouseEntered( MouseEvent e ) {
-
-		if ( PicTag.INSTANCE() != null ) PicTag.INSTANCE().changeBackground(2);
-		
+	public void mouseEntered( MouseEvent E ) {
+		if ( Parent != null ) Parent.mouseEntered();
 	}
 
-	public void mouseExited( MouseEvent e ) {
-
-		if ( PicTag.INSTANCE() != null ) PicTag.INSTANCE().changeBackground(1);
-
+	public void mouseExited( MouseEvent E ) {
+		if ( Parent != null ) Parent.mouseExited();
 	}
     
-    public void mouseMoved( MouseEvent me ) {
-        PicTag.INSTANCE().checkZones(me);
+    public void mouseMoved( MouseEvent E ) {
+        if ( Parent != null ) Parent.mouseMoved(E);
     }
 
 }

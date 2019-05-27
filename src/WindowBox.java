@@ -1,77 +1,111 @@
-
 import javax.swing.*;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.image.*;
+import javax.swing.event.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.border.*;
 
 public abstract class WindowBox extends JFrame {
 
-	private final Object INSTANCE; //This could be a generic type instead of Object.
+	private PicTag Parent; //Maybe this could be better.
+    private Dimension Size;
 	private WindowAtlas WindowMap;
 	private ArrayList<Zone> Zones;
 	private KeyAction KA1, KA2, KA3;
     private Image[] Assets;
-    private int closeOp, lastImage;
+    private int closeOp, lastBackgroundImage;
     private Component Anchor;
+    private DragListener Drag;
     
     //--= Constructor(s) =--
     //...I do not want to overload constructors...too much clutter.   (._ .)
     
-	public WindowBox(Object I, String N, Image[] As, Component An) {
+	public WindowBox(PicTag P, String N, Dimension S, Image[] As, Component An) {
         
         super(N);
         
-		INSTANCE = I;
-        SIZE = S;
+		Parent = P;
+        Size = S;
         Assets = As;
         Anchor = An;
+        Drag = new DragListener(this);
+        Zones = new ArrayList<Zone>();
         
         burdenAtlas();
         buildBox();
+
         this.add(new AlphaContainer(WindowMap));
         this.pack();
         this.setLocationRelativeTo(Anchor);
-        if (Anchor.equals(null))
+        if (Anchor == null)
             this.setVisible(true);
 	}
     
     
     
-    //--= Abstract Customization Methods =--
+    //--= Customization Methods =--
     
-    //Customize content pane.
-    private abstract void burdenAtlas();
+    //Used to Customize content pane, but it MUST initialize WindowMap.
+    private void burdenAtlas() {
+        WindowMap = new WindowAtlas(this, Size, Assets[0]);   
+    };
     
     //Customize JFrame.
-    private abstract void buildBox();
+    public abstract void buildBox();
     
-    //Customize click event responses, based on zone clicked.
-    private abstract void clicked(int zne);
+    public abstract void tell(int n);
+    
+    //v-= Override these to customize mouse event responses. =-v
+    
+    public void mouseClicked(MouseEvent ME) {
+        for (Zone Temp : Zones)
+            if ( Temp.Shape().contains( ME.getPoint() )) {
+                Temp.clicked();
+                return;
+            }
+    }
+    
+    public void defaultMouseMovedAction() { };
+    
+    public void mouseMoved(MouseEvent ME) {
+        for (Zone Temp : Zones)
+            if ( Temp.Shape().contains( ME.getPoint() )) {
+                Temp.entered();
+                return;
+            }
+        defaultMouseMovedAction();
+    }
+    
+    public void mouseEntered() { changeBackground(1); }
+    
+    public void mouseExited() { changeBackground(0); }
     
     
     
     //--= public API =--
     
-    public void toggleVisiblity() { this.setVisible(!this.isVisible()); }
+    public void toggleVisiblity() { this.setVisible( !this.isVisible() ); }
+    
+    //Add a component to the window map.
+    public void addComponent(Component C) {
+        WindowMap.add(C);
+    }
     
     //Apply the requested background to the window.
     public void changeBackground(int b) {
-        
-        if (b < 0 || b >= Assets.size)
+        if (b < 0 || b >= Assets.length)
             b = 0;
         
-        if (b == lastImage) return;
-        else lastImg = b;
+        if (b == lastBackgroundImage) return;
+        else lastBackgroundImage = b;
         
-        this.WindowMap.setBackground(Assets[b]);
+        this.WindowMap.changeBackground(Assets[b]);
     }
     
-    //Check if ME happened in an assigned clickable zone.
-    public void checkZones(MouseEvent me) {
-        //move to listeners?
-        for (Zone temp : Zones)
-            if (temp.Shape().contains(me.getPoint())) {
-                temp.trigger();
-                return;
-            }
-        changeBackground(0);
-    }
+    public ArrayList Zones() { return Zones; }
+    public DragListener Drag() { return Drag; }
+    public PicTag Parent() { return Parent; }
+    public int lastBackgroundImage() { return lastBackgroundImage; }
+    public Component Anchor() { return Anchor; }
 }
