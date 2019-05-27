@@ -13,6 +13,10 @@ make sure terminateProgram() works correctly
 make sure only one instance of program can be started at a time
 	lock file ?
 		check if can be rewritten (keep alive while 'running' to prevent overwrite)
+
+make window sizes relative, not pixel numbers
+	say NO to the crazy demands of resolution abuse >:c
+
 features:
 	filename variables
 	  %c counter
