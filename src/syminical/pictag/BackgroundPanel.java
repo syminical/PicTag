@@ -1,3 +1,4 @@
+package syminical.pictag;
 
 //I DID NOT CREATE THIS
 //I GOT THIS FROM https://tips4java.wordpress.com/2008/10/12/background-panel/

@@ -1,3 +1,5 @@
+package syminical.pictag;
+
 import java.awt.*;
 
 public abstract class Zone {

@@ -1,3 +1,5 @@
+package syminical.pictag;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;

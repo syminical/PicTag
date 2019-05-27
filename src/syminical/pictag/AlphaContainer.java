@@ -1,3 +1,4 @@
+package syminical.pictag;
 
 //I did not create this
 //I got it from https://tips4java.wordpress.com/2009/05/31/backgrounds-with-transparency/

@@ -1,3 +1,4 @@
+package syminical.pictag;
 
 //I did not create this, but I did edit it a little.
 //My changes let it handle all mouse events for the program.

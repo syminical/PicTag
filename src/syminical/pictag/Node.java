@@ -1,5 +1,4 @@
-
-//theworldisquiethere
+package syminical.pictag;
 
 public class Node<T> {
 

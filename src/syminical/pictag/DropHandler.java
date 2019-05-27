@@ -1,5 +1,4 @@
-
-//theworldisquiethere
+package syminical.pictag;
 
 import javax.swing.TransferHandler;
 import javax.imageio.*;

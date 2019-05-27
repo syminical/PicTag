@@ -1,5 +1,4 @@
-
-//theworldisquiethere
+package syminical.pictag;
 
 import java.io.File;
 

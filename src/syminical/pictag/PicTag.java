@@ -1,3 +1,5 @@
+package syminical.pictag;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.filechooser.*;
@@ -39,12 +41,12 @@ public class PicTag {
         DevAssets = new Image[1];
         
         try {
-			MainAssets[0] = ImageIO.read( new File( "img/main/0.png" ) );
-			MainAssets[1] = ImageIO.read( new File( "img/main/1.png" ) );
-			MainAssets[2] = ImageIO.read( new File( "img/main/2.png" ) );
-			MainAssets[3] = ImageIO.read( new File( "img/main/3.png" ) );
-			MainAssets[4] = ImageIO.read( new File( "img/main/4.png" ) );
-			SettingsAssets[0] = ImageIO.read( new File( "img/settings/0.png" ) );
+			MainAssets[0] = ImageIO.read( this.getClass().getResource("/img/main/0.png") );
+			MainAssets[1] = ImageIO.read( this.getClass().getResource("/img/main/1.png") );
+			MainAssets[2] = ImageIO.read( this.getClass().getResource("/img/main/2.png") );
+			MainAssets[3] = ImageIO.read( this.getClass().getResource("/img/main/3.png") );
+			MainAssets[4] = ImageIO.read( this.getClass().getResource("/img/main/4.png") );
+			SettingsAssets[0] = ImageIO.read( this.getClass().getResource("/img/settings/0.png") );
 		} catch (Exception e) { return false; }
         
         return true;
@@ -170,7 +172,7 @@ public class PicTag {
     public void startSettings() {
         //JOptionPane.showMessageDialog(new JFrame(), "PRETEND THIS IS A SETTINGS BOX! :D");
         SettingsBox.setLocationRelativeTo(SettingsBox.Anchor());
-        MainBox.setVisible(false);
+        //MainBox.setVisible(false);
         SettingsBox.setVisible(true);
     }
     
