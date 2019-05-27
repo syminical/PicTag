@@ -9,4 +9,6 @@ src/Pic.java
 src/PicList.java
 src/PicTag.java
 src/Tag.java
+src/WindowAtlas.java
+src/WindowBox.java
 src/Zone.java
