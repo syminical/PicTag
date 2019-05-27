@@ -8,7 +8,11 @@ Change main frame background on window focus loss
 make sure terminateProgram() works correctly
 	it currently is not always reliable :(
 		system.exit(); ??? :thinking:
+			https://stackoverflow.com/questions/14082619/how-to-make-java-release-all-the-memory-upon-system-exit0
 
+make sure only one instance of program can be started at a time
+	lock file ?
+		check if can be rewritten (keep alive while 'running' to prevent overwrite)
 features:
 	filename variables
 	  %c counter
